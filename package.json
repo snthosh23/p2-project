@@ -1,0 +1,11 @@
+{
+  "name": "smart-expense-tracker-root",
+  "version": "1.0.0",
+  "description": "Root proxies for Smart Expense Tracker fullstack deployment",
+  "scripts": {
+    "install-backend": "npm install --prefix backend",
+    "build": "npm install --prefix backend",
+    "start": "npm start --prefix backend",
+    "dev": "npm run dev --prefix backend"
+  }
+}
