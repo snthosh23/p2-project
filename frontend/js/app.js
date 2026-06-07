@@ -1,5 +1,8 @@
 // Global configurations
-const API_URL = 'http://localhost:5000/api';
+// Global configurations - dynamic API routing for local vs deployed environments
+const API_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') && window.location.port !== '5000'
+  ? 'http://localhost:5000/api'
+  : (window.location.protocol === 'file:' ? 'http://localhost:5000/api' : '/api');
 
 // Shared API fetch wrapper
 async function apiFetch(endpoint, options = {}) {

@@ -141,7 +141,7 @@ async function triggerCsvDownload() {
   const token = localStorage.getItem('token');
 
   try {
-    const response = await fetch('http://localhost:5000/api/transactions/export/csv', {
+    const response = await fetch(`${API_URL}/transactions/export/csv`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
@@ -172,7 +172,7 @@ async function triggerPdfDownload() {
   const token = localStorage.getItem('token');
 
   try {
-    const response = await fetch(`http://localhost:5000/api/reports/export/pdf?month=${activeMonth}`, {
+    const response = await fetch(`${API_URL}/reports/export/pdf?month=${activeMonth}`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`
