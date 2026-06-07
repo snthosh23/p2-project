@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard view for tracking your income, expenses, budgets and savings.">
+  <title>Dashboard - Smart Expense Tracker</title>
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    <main class="main-content">
+      <!-- Sticky Navbar injected by app.js here -->
+
+      <!-- Stats Counters Grid -->
+      <div class="stats-grid">
+        <!-- Balance Card -->
+        <div class="glass-card stat-card">
+          <div class="stat-card-header">
+            <span class="stat-title">Total Balance</span>
+            <div class="stat-icon balance"><i class="fa-solid fa-scale-balanced"></i></div>
+          </div>
+          <div class="stat-value" id="total-balance">$0.00</div>
+          <div class="stat-subtext">Net liquid assets across accounts</div>
+        </div>
+
+        <!-- Income Card -->
+        <div class="glass-card stat-card">
+          <div class="stat-card-header">
+            <span class="stat-title">Monthly Income</span>
+            <div class="stat-icon income"><i class="fa-solid fa-arrow-trend-up"></i></div>
+          </div>
+          <div class="stat-value" id="total-income">$0.00</div>
+          <div class="stat-subtext" id="income-month-lbl">Active Month</div>
+        </div>
+
+        <!-- Expense Card -->
+        <div class="glass-card stat-card">
+          <div class="stat-card-header">
+            <span class="stat-title">Monthly Expense</span>
+            <div class="stat-icon expense"><i class="fa-solid fa-arrow-trend-down"></i></div>
+          </div>
+          <div class="stat-value" id="total-expense">$0.00</div>
+          <div class="stat-subtext" id="expense-month-lbl">Active Month</div>
+        </div>
+
+        <!-- Savings Card -->
+        <div class="glass-card stat-card">
+          <div class="stat-card-header">
+            <span class="stat-title">Net Savings</span>
+            <div class="stat-icon savings"><i class="fa-solid fa-piggy-bank"></i></div>
+          </div>
+          <div class="stat-value" id="total-savings">$0.00</div>
+          <div class="stat-subtext" id="savings-month-lbl">Savings reserve margin</div>
+        </div>
+      </div>
+
+      <!-- Financial Health & Insights -->
+      <div class="dashboard-details-grid" style="grid-template-columns: 1fr 1fr; gap: 24px;">
+        <!-- Financial Health Card -->
+        <div class="glass-card" style="display:flex; flex-direction:row; align-items:center; justify-content:space-around; gap: 20px;">
+          <div class="health-score-container">
+            <h3 style="margin-bottom:15px; font-size:16px;">Financial Health Score</h3>
+            <div class="health-gauge-outer">
+              <div class="health-gauge-bar"></div>
+              <div class="health-gauge-fill" id="health-gauge-fill" style="transform: rotate(-45deg);"></div>
+              <div class="health-score-text" id="health-score-value">0</div>
+            </div>
+            <div style="font-weight: 700; font-size:15px; margin-top:5px;" id="health-score-grade">-</div>
+          </div>
+          <div style="flex-grow:1; max-width: 250px;">
+            <p style="font-size:13px; color:var(--text-muted); line-height:1.5;" id="health-score-desc">
+              Log transactions to compute your current financial stability score and advice index.
+            </p>
+          </div>
+        </div>
+
+        <!-- AI Spending Insights -->
+        <div class="glass-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <h3><i class="fa-solid fa-wand-magic-sparkles" style="color:var(--primary); margin-right:8px;"></i>AI Spending Insights</h3>
+            <span class="hero-tag" style="margin-bottom:0;">Live Heuristics</span>
+          </div>
+          <div id="ai-insights-box" style="font-size:13px; line-height:1.5; color:var(--text-muted); display:flex; flex-direction:column; gap: 8px;">
+            Loading spending advice trends...
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts & Visual Analytics Grid (4 charts requested) -->
+      <div class="charts-grid">
+        <!-- Income vs Expense Bar Chart -->
+        <div class="glass-card chart-card">
+          <h3>Income vs Expense</h3>
+          <div class="chart-wrapper">
+            <canvas id="barChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Expense Category Distribution Pie Chart -->
+        <div class="glass-card chart-card">
+          <h3>Expense Distribution</h3>
+          <div class="chart-wrapper">
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Monthly Spending Trend Line Chart -->
+        <div class="glass-card chart-card">
+          <h3>Monthly Spending Trend</h3>
+          <div class="chart-wrapper">
+            <canvas id="lineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Savings Accumulation Trend Chart -->
+        <div class="glass-card chart-card">
+          <h3>Savings Reserve Trend</h3>
+          <div class="chart-wrapper">
+            <canvas id="savingsTrendChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Transactions & Budgets Progress Grid -->
+      <div class="dashboard-details-grid">
+        <!-- Transactions List -->
+        <div class="glass-card recent-transactions-card">
+          <div class="card-header-actions">
+            <h3>Recent Ledger Transactions</h3>
+            <a href="reports.html" class="btn-link">View Statement <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div class="transaction-list" id="dashboard-tx-list">
+            <div style="text-align:center; color:var(--text-muted); padding: 30px;">No transaction records. click "Add Expense" or "Add Income" to record logs.</div>
+          </div>
+        </div>
+
+        <!-- Budgets Progress tracker -->
+        <div class="glass-card budget-planner-card">
+          <div class="card-header-actions">
+            <h3>Budget Allocation</h3>
+            <a href="budgets.html" class="btn-link">Edit Planner <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+          <div id="dashboard-budget-list" style="display:flex; flex-direction:column; gap:16px;">
+            <div style="text-align:center; color:var(--text-muted); padding:30px;">No budget envelopes set for this month.</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

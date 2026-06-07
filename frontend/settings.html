@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Configure system settings, dark mode preferences and defaults.">
+  <title>System Settings - Smart Expense Tracker</title>
+  
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <main class="main-content">
+      <!-- Sticky Navbar injected by app.js here -->
+
+      <div class="dashboard-details-grid" style="grid-template-columns: 1fr; max-width: 650px; margin: 0 auto; gap:24px;">
+        
+        <!-- System Preferences -->
+        <div class="glass-card">
+          <h3>System Preferences</h3>
+          <p style="color:var(--text-muted); font-size:13px; margin: 6px 0 20px 0;">Customize default display currency, active theme overrides, and budget notifications thresholds.</p>
+          
+          <form id="settings-form">
+            <div class="form-group">
+              <label for="settings-currency">Base Currency</label>
+              <select id="settings-currency" class="form-control">
+                <option value="USD">USD ($) — US Dollar</option>
+                <option value="EUR">EUR (€) — Euro</option>
+                <option value="GBP">GBP (£) — British Pound</option>
+                <option value="INR">INR (₹) — Indian Rupee</option>
+                <option value="JPY">JPY (¥) — Japanese Yen</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-theme">Display Mode</label>
+              <select id="settings-theme" class="form-control">
+                <option value="light">Light Mode (Classic Premium White)</option>
+                <option value="dark">Dark Mode (Sleek Glass Blue)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-threshold">Budget Warning Threshold (%)</label>
+              <input type="number" id="settings-threshold" class="form-control" value="85" min="50" max="100">
+              <span style="font-size:11px; color:var(--text-muted); display:block; margin-top:4px;">We will send warning alerts once category spends cross this percentage of their ceiling limit.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+              <i class="fa-solid fa-floppy-disk"></i> Save Preferences
+            </button>
+          </form>
+        </div>
+
+        <!-- Danger Zone -->
+        <div class="glass-card" style="border-color: rgba(239, 68, 68, 0.3);">
+          <h3 style="color:var(--danger);"><i class="fa-solid fa-circle-exclamation" style="margin-right:8px;"></i>Danger Zone</h3>
+          <p style="color:var(--text-muted); font-size:13px; margin: 6px 0 20px 0; line-height:1.5;">
+            Performing these actions will result in irreversible data loss. Make sure to back up reports or export CSV logs beforehand.
+          </p>
+          
+          <div style="border-top:1px solid var(--border-color); padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+            <div>
+              <strong style="color:var(--text-main); font-size:14px;">Purge Ledger Data</strong>
+              <div style="font-size:11px; color:var(--text-muted); margin-top:2px;">Deletes all transaction history, budgets and notifications.</div>
+            </div>
+            <button class="btn btn-danger" id="purge-data-btn">
+              <i class="fa-solid fa-trash-can"></i> Erase All Data
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </main>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
