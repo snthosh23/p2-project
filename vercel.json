@@ -1,24 +1,24 @@
 {
   "version": 2,
-  "outputDirectory": "frontend",
+  "outputDirectory": "smart-expense-tracker/frontend",
   "builds": [
     {
-      "src": "backend/server.js",
+      "src": "smart-expense-tracker/backend/server.js",
       "use": "@vercel/node"
     },
     {
-      "src": "frontend/**",
+      "src": "smart-expense-tracker/frontend/**",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "backend/server.js"
+      "dest": "smart-expense-tracker/backend/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "frontend/$1"
+      "dest": "smart-expense-tracker/frontend/$1"
     }
   ]
 }
