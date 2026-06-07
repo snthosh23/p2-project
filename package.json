@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Root proxies for Smart Expense Tracker fullstack deployment",
   "scripts": {
-    "postinstall": "npm install --prefix backend",
-    "build": "npm install --prefix backend",
+    "postinstall": "node install-backend.js || \"%NODE%\" install-backend.js || \"%npm_node_execpath%\" install-backend.js || \"$NODE\" install-backend.js || \"$npm_node_execpath\" install-backend.js",
+    "build": "node install-backend.js || \"%NODE%\" install-backend.js || \"%npm_node_execpath%\" install-backend.js || \"$NODE\" install-backend.js || \"$npm_node_execpath\" install-backend.js",
     "start": "npm start --prefix backend",
-    "dev": "npm run dev --prefix backend"
+    "dev": "npm run dev --prefix backend",
+    "test-env": "set"
   }
 }
