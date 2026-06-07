@@ -14,11 +14,11 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "smart-expense-tracker/backend/server.js"
+      "dest": "/smart-expense-tracker/backend/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "smart-expense-tracker/frontend/$1"
+      "dest": "/smart-expense-tracker/frontend/$1"
     }
   ]
 }

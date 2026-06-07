@@ -6,13 +6,6 @@
     "postinstall": "node install-backend.js || \"%NODE%\" install-backend.js || \"%npm_node_execpath%\" install-backend.js || \"$NODE\" install-backend.js || \"$npm_node_execpath\" install-backend.js",
     "build": "node install-backend.js || \"%NODE%\" install-backend.js || \"%npm_node_execpath%\" install-backend.js || \"$NODE\" install-backend.js || \"$npm_node_execpath\" install-backend.js",
     "start": "npm start --prefix backend",
-    "dev": "npm run dev --prefix backend",
-    "test-env": "set"
-  },
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ]
+    "dev": "npm run dev --prefix backend"
+  }
 }
