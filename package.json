@@ -8,5 +8,11 @@
     "start": "npm start --prefix backend",
     "dev": "npm run dev --prefix backend",
     "test-env": "set"
-  }
+  },
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
+    }
+  ]
 }
